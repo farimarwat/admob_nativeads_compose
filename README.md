@@ -10,6 +10,15 @@ Implement:
   implementation 'com.google.android.gms:play-services-ads:22.1.0'
   implementation 'io.github.farimarwat:admobnative-compose:1.0'
 ```
+and also include this in Manifest file:
+```
+<application
+...
+<meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${ADMOB_API_KEY}" />
+</application>
+```
 
 ### Usage:
 ```

@@ -70,3 +70,12 @@ This function takes 3 params:
 1. Context
 2. Ad Unit Id which is provided by admob for native ad
 3. Refresh Interval to auto refresh ad. if not given then 60 seconds is default which is recommanded by google.
+
+### Change Log
+**1.1**
+
+ANR fixed
+
+**1.0**
+
+Initial release

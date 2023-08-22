@@ -72,6 +72,10 @@ This function takes 3 params:
 3. Refresh Interval to auto refresh ad. if not given then 60 seconds is default which is recommanded by google.
 
 ### Change Log
+**1.2**
+
+minSDK downgraded to 21
+
 **1.1**
 
 ANR fixed

@@ -8,7 +8,7 @@ Integrate AdMob Native Ads seamlessly into your Android app with our Jetpack Com
 Implement:
 ```
   implementation 'com.google.android.gms:play-services-ads:22.1.0'
-  implementation 'io.github.farimarwat:admobnative-compose:1.1'
+  implementation 'io.github.farimarwat:admobnative-compose:1.2'
 ```
 and also include this in Manifest file:
 ```

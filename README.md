@@ -1,16 +1,24 @@
-# Admob Nativeads JetPack Compose
-Integrate AdMob Native Ads seamlessly into your Android app with our Jetpack Compose Android Library. Unlock new revenue streams by effortlessly blending native ads into your app's user interface. Our library offers easy-to-implement components for precise ad targeting, customizable formats, and seamless ad loading and rendering. Enhance user engagement while maintaining a consistent user experience. Maximize monetization potential with AdMob Native Ads and our Jetpack Compose Android Library today.
+# AdMob Native Compose
 
-<img src="https://github.com/farimarwat/admob_nativeads_compose/blob/main/demo.png" width="30%" height="30%"/>
+A simple way to implement native ads in your Jetpack Compose Android project.
 
+## Setup
 
-### Step 1: 
-Implement:
+Add the dependency in your app level `build.gradle`:
+
+```gradle
+dependencies {
+    implementation 'io.github.farimarwat:admobnative-compose:1.3'
+    implementation 'com.google.android.gms:play-services-ads:22.6.0'  // Required dependency
+}
 ```
-  implementation 'com.google.android.gms:play-services-ads:22.1.0'
-  implementation 'io.github.farimarwat:admobnative-compose:1.2'
-```
-and also include this in Manifest file:
+
+## Usage
+
+### Basic Implementation
+
+Add the below in `Manifest`
+
 ```
 <application
 ...
@@ -20,66 +28,72 @@ and also include this in Manifest file:
 </application>
 ```
 
-### Usage:
+
+The very basic example:
+```kotlin
+val adState = rememberNativeAdState(
+    context = LocalContext.current,
+    adUnitId = "your_ad_unit_id",
+    refreshInterval = 60000L
+)
+
+BannerAdAdmobSmall(
+    context = LocalContext.current,
+    loadedAd = adState
+)
 ```
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            AdmobnativeComposeExampleTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    //get a context to use in the library
-                    val context = LocalContext.current
 
-                    //get nativead state
-                    val adstate = rememberNativeAdState(context = context, adUnitId = BuildConfig.ADMOB_NATIVE_TEST)
+Only two types of banners available:
 
-                    MainScreen(adstate = adstate)
-                }
-            }
-        }
+```
+BannerAdAdmobSmall()
+
+BannerAdAdmobMedium()
+```
+
+### Custom Colors
+
+```kotlin
+val customColors = AdColors(
+    headlineText = Color.White,
+    bodyText = Color.Gray,
+    buttonText = Color.Black,
+    badgeText = Color.White
+)
+
+BannerAdAdmobSmall(
+    context = LocalContext.current,
+    loadedAd = adState,
+    adColors = customColors
+)
+```
+
+### With Error Handling
+
+```kotlin
+val adState = rememberNativeAdState(
+    context = LocalContext.current,
+    adUnitId = "your_ad_unit_id",
+    refreshInterval = 60000L,
+    onAdLoaded = {
+        // Handle successful ad load
+    },
+    onAdFailedToLoad = { error ->
+        // Handle ad load failure
     }
-}
-
-@Composable
-fun MainScreen(adstate: NativeAd?){
-    Column(modifier = Modifier.fillMaxSize()){
-
-        //Small Banner
-        BannerAdAdmobSmall(loadedAd = adstate)
-        Spacer(modifier = Modifier.fillMaxWidth())
-        //Medium Banner
-        BannerAdAdmobMedium(loadedAd = adstate)
-    }
-}
+)
 ```
 
-### rememberNativeAdState
+### Custom Backgrounds
+
+```kotlin
+BannerAdAdmobSmall(
+    context = LocalContext.current,
+    loadedAd = adState,
+    adBackground = yourCustomDrawable,
+    actionButtonBackground = yourButtonDrawable,
+    badgeBackground = yourBadgeDrawable
+)
 ```
-rememberNativeAdState(context = context,
-                        adUnitId = "adunit id", 
-                        refreshInterval = 60000 
-                    )
-```
 
-This function takes 3 params:
-1. Context
-2. Ad Unit Id which is provided by admob for native ad
-3. Refresh Interval to auto refresh ad. if not given then 60 seconds is default which is recommanded by google.
 
-### Change Log
-**1.2**
-
-minSDK downgraded to 21
-
-**1.1**
-
-ANR fixed
-
-**1.0**
-
-Initial release

@@ -8,7 +8,7 @@ Add the dependency in your app level `build.gradle`:
 
 ```gradle
 dependencies {
-    implementation 'io.github.farimarwat:admobnative-compose:1.3'
+    implementation 'io.github.farimarwat:admobnative-compose:1.4'
     implementation 'com.google.android.gms:play-services-ads:22.6.0'  // Required dependency
 }
 ```
